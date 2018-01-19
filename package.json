@@ -1,0 +1,13 @@
+{
+  "name": "imit-java-day3",
+  "version": "1.0.0",
+  "description": "IMIT Java Course Day 3",
+  "scripts": {
+    "db_dump": "docker-compose exec mysql /bin/bash -c \"mysqldump -uroot -ppassword --quick --skip-comments --all-databases | gzip > /app/db_backups/sql_dump.sql.gz\"",
+    "db_restore": "docker-compose exec mysql /bin/bash -c 'gunzip < /app/db_backups/sql_dump.sql.gz | mysql -uroot -ppassword'",
+    "db_load_employees": "docker-compose exec mysql /bin/bash -c 'cd /app/test_db/; mysql -uroot -ppassword < /app/test_db/employees.sql'",
+    "start": "docker-compose up"
+  },
+  "author": "Bryan Vaz",
+  "license": "UNLICENSED"
+}

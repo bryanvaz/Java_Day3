@@ -2,13 +2,12 @@ version: '3'
 services:
     mysql:
         image: mysql:8.0.3
-        env_file:
-            - ".env"
         ports:
             - "3306:3306"
         volumes:
             - "./tmp/db/mysql:/var/lib/mysql"
             - "./db_backups:/app/db_backups"
+            - "./test_db:/app/test_db"
         environment:
             MYSQL_ROOT_PASSWORD: password
             MYSQL_DATABASE: homestead
