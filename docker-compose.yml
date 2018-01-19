@@ -1,0 +1,39 @@
+version: '3'
+services:
+    mysql:
+        image: mysql:8.0.3
+        env_file:
+            - ".env"
+        ports:
+            - "3306:3306"
+        volumes:
+            - "./tmp/db/mysql:/var/lib/mysql"
+            - "./db_backups:/app/db_backups"
+        environment:
+            MYSQL_ROOT_PASSWORD: password
+            MYSQL_DATABASE: homestead
+            MYSQL_USER: homestead
+            MYSQL_PASSWORD: secret
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        depends_on:
+            - mysql
+        ports:
+            - 8181:80
+        environment:
+            MYSQL_USERNAME: homestead
+            MYSQL_ROOT_PASSWORD: password
+            PMA_HOST: mysql
+
+# networks:
+#     host-link:
+#         internal: false
+#         driver: bridge
+    # # Code network is for app code only (Internal)
+    # code-net:
+    #     internal: true
+    #     driver: bridge
+    # # Database network (Internal)
+    # db-net:
+    #     internal: true
+    #     driver: bridge
