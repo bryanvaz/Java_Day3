@@ -6,7 +6,7 @@ public class JDBCIntro {
     /**
      * First Connection to JDBC
      */
-    public static void TestConnect(){
+    public static void testConnect(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
 
@@ -34,6 +34,33 @@ public class JDBCIntro {
             //Close the connection
             con.close();
         }catch(Exception e){ System.out.println(e);}
+    }
+
+    /**
+     * Works only in Java 7 or lower
+     * The ODBC bridge has been removed in v8
+     */
+    public static void odbcBridge(){
+        try {
+            //Load the JdbcOdbc Driver
+            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+
+            //Specify the Database URL where the DNS will be and the user and password
+            Connection con = DriverManager.getConnection("jdbc:odbc:sonoo", "root", "password");
+
+            //Initialize the statement to be used, specify if rows are scrollable
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+
+            //ResultSet will hold the data retrieved
+            ResultSet rs = stmt.executeQuery("SELECT * FROM emp");
+
+            //Display the results
+            while(rs.next()){
+                System.out.println(rs.getInt("id") + " " + rs.getString("name") + " " + rs.getInt("age"));
+            }
+        }
+        catch(Exception e){ System.out.println(e);}
+
     }
 
 }
