@@ -25,7 +25,12 @@ public class Main {
 //        CRUDOperations.deleteDecaf();
 //        CRUDOperations.readPrices();
 
-        CRUDExcercise.start();
+//        CRUDExcercise.start();
+
+//        StoreProc.runStoredProcedures("Amaretto",(float)1.2,(float)22.2);
+
+        JoinExample.testJoin();
+        JoinExample.joinSetTest("Acme, Inc.");
 
     }
 }
